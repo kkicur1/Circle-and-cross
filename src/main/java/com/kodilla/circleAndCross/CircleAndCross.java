@@ -32,17 +32,17 @@ public class CircleAndCross extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        gameName.setFont(new Font("Arial", 24));
+        gameName.setFont(new Font("Arial", 14));
         gameName.setTextFill(Color.web("#0000FF"));
-        yourScore.setFont(new Font("Arial", 24));
+        yourScore.setFont(new Font("Arial", 14));
         yourScore.setTextFill(Color.web("#0000FF"));
-        computerScore.setFont(new Font("Arial", 24));
+        computerScore.setFont(new Font("Arial", 14));
         computerScore.setTextFill(Color.web("#0000FF"));
-        yourResult.setFont(new Font("Arial", 24));
+        yourResult.setFont(new Font("Arial", 14));
         yourResult.setTextFill(Color.web("#0000FF"));
-        computerResult.setFont(new Font("Arial", 24));
+        computerResult.setFont(new Font("Arial", 14));
         computerResult.setTextFill(Color.web("#0000FF"));
-        status.setFont(new Font("Arial", 24));
+        status.setFont(new Font("Arial", 14));
         status.setTextFill(Color.web("red"));
 
 
@@ -59,12 +59,6 @@ public class CircleAndCross extends Application {
         //method();
         //});
 
-
-        Button chooseButton = new Button();
-        chooseButton.setText(" ");
-        //chooseButton.setOnAction((e) -> {
-        //setText("");
-        // });
 
         //Plansza
         board.setAlignment(Pos.CENTER);
