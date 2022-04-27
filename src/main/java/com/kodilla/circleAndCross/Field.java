@@ -40,7 +40,7 @@ public class Field extends Button {
 
     private void updateGraphic() {
         ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(100);
+        imageView.setFitWidth(150);
         imageView.setPreserveRatio(true);
         this.setGraphic(imageView);
     }

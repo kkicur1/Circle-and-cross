@@ -14,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class CircleAndCross extends Application {
+    public int index=0;
     private Label gameName = new Label("Circle and Cross");
     private Label yourScore = new Label("Your score:");
     private Label computerScore = new Label("Computer score:");
@@ -24,6 +25,69 @@ public class CircleAndCross extends Application {
     private Field[][] fields = new Field[3][3];
     private GridPane menu = new GridPane();
     private Image turn = Field.CIRCLE;
+
+    //Stworzenie pól
+    public void fieldCreation() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                final Field field = new Field(Field.EMPTY);
+                fields[i][j] = field;
+                board.add(field, i, j);
+
+                field.setOnAction((ActionEvent actionEvent) -> {
+                    Field source = (Field) actionEvent.getSource();
+
+                    if (source.isEmpty()) {
+                        if (turn.equals(Field.CIRCLE)) {
+                            source.setImage(Field.CIRCLE);
+                            turn = Field.CROSS;
+                        } else {
+                            source.setImage(Field.CROSS);
+                            turn = Field.CIRCLE;
+                        }
+                    }
+                    winCheck();
+                });
+            }
+        }
+    }
+
+
+    //weryfikacja wygranej
+    public void winCheck () {
+
+        if (fields[1][1].isCircle()&&fields[1][2].isCircle()&&fields[1][3].isCircle()||
+                fields[2][1].isCircle()&&fields[2][2].isCircle()&&fields[3][3].isCircle()||
+                fields[3][1].isCircle()&&fields[3][2].isCircle()&&fields[3][3].isCircle()||
+                fields[1][1].isCircle()&&fields[2][1].isCircle()&&fields[3][1].isCircle()||
+                fields[1][2].isCircle()&&fields[2][2].isCircle()&&fields[3][2].isCircle()||
+                fields[1][3].isCircle()&&fields[2][3].isCircle()&&fields[3][3].isCircle()||
+                fields[1][1].isCircle()&&fields[2][2].isCircle()&&fields[3][3].isCircle()||
+                fields[3][1].isCircle()&&fields[2][2].isCircle()&&fields[1][3].isCircle()) {
+                index++;
+                StringBuilder total= new StringBuilder();
+                total.append(index);
+                yourResult.setText(total.toString());
+                status.setText("YOU WIN!");
+                System.out.println("YOU WIN!");
+        }
+
+            if (fields[1][1].isCross()&&fields[1][2].isCross()&&fields[1][3].isCross()||
+                    fields[2][1].isCross()&&fields[2][2].isCross()&&fields[3][3].isCross()||
+                    fields[3][1].isCross()&&fields[3][2].isCross()&&fields[3][3].isCross()||
+                    fields[1][1].isCross()&&fields[2][1].isCross()&&fields[3][1].isCross()||
+                    fields[1][2].isCross()&&fields[2][2].isCross()&&fields[3][2].isCross()||
+                    fields[1][3].isCross()&&fields[2][3].isCross()&&fields[3][3].isCross()||
+                    fields[1][1].isCross()&&fields[2][2].isCross()&&fields[3][3].isCross()||
+                    fields[3][1].isCross()&&fields[2][2].isCross()&&fields[1][3].isCross()) {
+                    index++;
+                    StringBuilder total= new StringBuilder();
+                    total.append(index);
+                    yourResult.setText(total.toString());
+                    status.setText("YOU WIN!");
+                    System.out.println("YOU WIN!");
+            }
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -45,7 +109,8 @@ public class CircleAndCross extends Application {
         status.setFont(new Font("Arial", 14));
         status.setTextFill(Color.web("red"));
 
-
+        
+        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
@@ -55,44 +120,25 @@ public class CircleAndCross extends Application {
 
         Button newbtn = new Button();
         newbtn.setText("New game");
-        //newbtn.setOnAction((e) -> {
-        //method();
-        //});
+        newbtn.setFont(new Font("Arial", 14));
+        newbtn.setTextFill(Color.web("red"));
+        newbtn.setOnAction((e) -> {
+            fieldCreation();
+            });
 
 
         //Plansza
         board.setAlignment(Pos.CENTER);
-        board.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+        board.setPadding(new Insets(2.5, 12.5, 13.5, 14.5));
         board.setHgap(2.5);
         board.setVgap(2.5);
         board.setGridLinesVisible(true);
 
         //Stworzenie pól
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                final Field field = new Field(Field.EMPTY);
-                fields[i][j] = field;
-                board.add(field, i, j);
-
-                field.setOnAction((ActionEvent actionEvent) -> {
-                    Field source = (Field) actionEvent.getSource();
-
-                    if (source.isEmpty()) {
-                        if (turn.equals(Field.CIRCLE)) {
-                            source.setImage(Field.CIRCLE);
-                            turn = Field.CROSS;
-                        } else {
-                            source.setImage(Field.CROSS);
-                            turn = Field.CIRCLE;
-                        }
-                    }
-
-                });
-            }
-        }
+        fieldCreation();
 
         menu.setAlignment(Pos.CENTER);
-        menu.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+        menu.setPadding(new Insets(1.5, 1.5, 1.5, 1.5));
         menu.setHgap(2.5);
         menu.setVgap(2.5);
         menu.setGridLinesVisible(true);
@@ -100,10 +146,10 @@ public class CircleAndCross extends Application {
         menu.add(newbtn,0,0);
         menu.add(gameName,1,0);
         menu.add(yourScore,2,0);
-        menu.add(computerScore,3,0);
-        menu.add(yourResult,4,0);
+        menu.add(yourResult,3,0);
+        menu.add(computerScore,4,0);
         menu.add(computerResult,5,0);
-        menu.add(status,6,0);
+        menu.add(status,2,1);
 
         grid.add(board, 0, 0);
         grid.add(menu, 0, 1);
