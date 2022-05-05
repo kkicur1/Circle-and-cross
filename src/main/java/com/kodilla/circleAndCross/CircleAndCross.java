@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class CircleAndCross extends Application {
-    public int index=0;
+    public int index = 0;
     private Label gameName = new Label("Circle and Cross");
     private Label yourScore = new Label("Your score:");
     private Label computerScore = new Label("Computer score:");
@@ -54,39 +54,38 @@ public class CircleAndCross extends Application {
 
 
     //weryfikacja wygranej
-    public void winCheck () {
-
-        if (fields[1][1].isCircle()&&fields[1][2].isCircle()&&fields[1][3].isCircle()||
-                fields[2][1].isCircle()&&fields[2][2].isCircle()&&fields[3][3].isCircle()||
-                fields[3][1].isCircle()&&fields[3][2].isCircle()&&fields[3][3].isCircle()||
-                fields[1][1].isCircle()&&fields[2][1].isCircle()&&fields[3][1].isCircle()||
-                fields[1][2].isCircle()&&fields[2][2].isCircle()&&fields[3][2].isCircle()||
-                fields[1][3].isCircle()&&fields[2][3].isCircle()&&fields[3][3].isCircle()||
-                fields[1][1].isCircle()&&fields[2][2].isCircle()&&fields[3][3].isCircle()||
-                fields[3][1].isCircle()&&fields[2][2].isCircle()&&fields[1][3].isCircle()) {
-                index++;
-                StringBuilder total= new StringBuilder();
-                total.append(index);
-                yourResult.setText(total.toString());
-                status.setText("YOU WIN!");
-                System.out.println("YOU WIN!");
+    public void winCheck() {
+        if ((fields[0][0].isCircle() && fields[0][1].isCircle() && fields[0][2].isCircle()) ||
+                (fields[1][0].isCircle() && fields[1][1].isCircle() && fields[1][2].isCircle()) ||
+                (fields[2][0].isCircle() && fields[2][1].isCircle() && fields[2][2].isCircle()) ||
+                (fields[0][0].isCircle() && fields[1][0].isCircle() && fields[2][0].isCircle()) ||
+                (fields[0][1].isCircle() && fields[1][1].isCircle() && fields[2][1].isCircle()) ||
+                (fields[0][2].isCircle() && fields[1][2].isCircle() && fields[2][2].isCircle()) ||
+                (fields[0][0].isCircle() && fields[1][1].isCircle() && fields[2][2].isCircle()) ||
+                (fields[2][0].isCircle() && fields[1][1].isCircle() && fields[0][2].isCircle())) {
+            index++;
+            StringBuilder total = new StringBuilder();
+            total.append(index);
+            yourResult.setText(total.toString());
+            status.setText("YOU WIN! Click new game");
+            System.out.println("YOU WIN!");
+            fieldCreation();
         }
 
-            if (fields[1][1].isCross()&&fields[1][2].isCross()&&fields[1][3].isCross()||
-                    fields[2][1].isCross()&&fields[2][2].isCross()&&fields[3][3].isCross()||
-                    fields[3][1].isCross()&&fields[3][2].isCross()&&fields[3][3].isCross()||
-                    fields[1][1].isCross()&&fields[2][1].isCross()&&fields[3][1].isCross()||
-                    fields[1][2].isCross()&&fields[2][2].isCross()&&fields[3][2].isCross()||
-                    fields[1][3].isCross()&&fields[2][3].isCross()&&fields[3][3].isCross()||
-                    fields[1][1].isCross()&&fields[2][2].isCross()&&fields[3][3].isCross()||
-                    fields[3][1].isCross()&&fields[2][2].isCross()&&fields[1][3].isCross()) {
-                    index++;
-                    StringBuilder total= new StringBuilder();
-                    total.append(index);
-                    yourResult.setText(total.toString());
-                    status.setText("YOU WIN!");
-                    System.out.println("YOU WIN!");
-            }
+        if ((fields[0][0].isCross() && fields[0][1].isCross() && fields[0][2].isCross()) ||
+                (fields[1][0].isCross() && fields[1][1].isCross() && fields[1][2].isCross()) ||
+                (fields[2][0].isCross() && fields[2][1].isCross() && fields[2][2].isCross()) ||
+                (fields[0][0].isCross() && fields[1][0].isCross() && fields[2][0].isCross()) ||
+                (fields[0][1].isCross() && fields[1][1].isCross() && fields[2][1].isCross()) ||
+                (fields[0][2].isCross() && fields[1][2].isCross() && fields[2][2].isCross()) ||
+                (fields[0][0].isCross() && fields[1][1].isCross() && fields[2][2].isCross()) ||
+                (fields[2][0].isCross() && fields[1][1].isCross() && fields[0][2].isCross())) {
+            index++;
+            yourResult.setText(index+"");
+            status.setText("YOU WIN! Click new game");
+            System.out.println("YOU WIN!");
+            fieldCreation();
+        }
     }
 
     public static void main(String[] args) {
@@ -109,8 +108,7 @@ public class CircleAndCross extends Application {
         status.setFont(new Font("Arial", 14));
         status.setTextFill(Color.web("red"));
 
-        
-        
+
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
@@ -124,7 +122,8 @@ public class CircleAndCross extends Application {
         newbtn.setTextFill(Color.web("red"));
         newbtn.setOnAction((e) -> {
             fieldCreation();
-            });
+            status.setText("");
+        });
 
 
         //Plansza
@@ -143,13 +142,13 @@ public class CircleAndCross extends Application {
         menu.setVgap(2.5);
         menu.setGridLinesVisible(true);
 
-        menu.add(newbtn,0,0);
-        menu.add(gameName,1,0);
-        menu.add(yourScore,2,0);
-        menu.add(yourResult,3,0);
-        menu.add(computerScore,4,0);
-        menu.add(computerResult,5,0);
-        menu.add(status,2,1);
+        menu.add(newbtn, 0, 0);
+        menu.add(gameName, 1, 0);
+        menu.add(yourScore, 2, 0);
+        menu.add(yourResult, 3, 0);
+        menu.add(computerScore, 4, 0);
+        menu.add(computerResult, 5, 0);
+        menu.add(status, 2, 1);
 
         grid.add(board, 0, 0);
         grid.add(menu, 0, 1);
