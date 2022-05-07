@@ -13,6 +13,16 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../kodilla-good-patterns" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../Program Files/gradle-7.3.3" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../kodilla-good-patterns" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
